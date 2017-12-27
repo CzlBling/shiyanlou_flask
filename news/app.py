@@ -44,11 +44,12 @@ def write_datas():
 
 @app.route('/')
 def index():
+	return render_template('index.html', files = File.query.all())
 
-
-@app.route('/files/<file_id>')
+@app.route('/files/<int:file_id>')
 def files(file_id):
-
+	file_item = File.query.get_or_404(file_id)
+	return render_template('file.html', file_item=file_item)
 
 @app.errorhandler(404)
 def not_found(error):
